@@ -4,7 +4,7 @@
 > 参考 [git commit 规范指南](https://www.jianshu.com/p/201bd81e7dc9?utm_source=oschina-app) , [git commit emoji](https://github.com/liuchengxu/git-commit-emoji-cn)
 
 ### commit 格式
-> icon + type(必填) + subject(必填) + body
+> icon + type + subject(必填) + body
 - icon 图标
 - type 本次 commit 类型，主要类型有:
   - feat：新功能（feature）
@@ -17,7 +17,7 @@
 - subject 本次 commit 目的的简短描述，不超过50个字符。
 - body 本次 commit 的详细描述，可以分成多行。
 
-==以上 type & subject 是 commit 必填字段.==
+==以上 icon 和 type 二选一 ， subject 是 commit 必填字段.==
 
 #### 例子
 `:bug: fix: fix bugs`
