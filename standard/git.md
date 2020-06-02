@@ -50,5 +50,27 @@ emoji                                   | emoji 代码                   | commi
 :penguin: (企鹅)                        | `:penguin:`                  | 修复 Linux 下的问题
 :checkered_flag: (旗帜)                 | `:checkered_flag:`           | 修复 Windows 下的问题
 
-## 版本管理
+## 分支管理
 
+参考[流程图](https://www.processon.com/diagraming/5ed5a8de7d9c08162f2ad854)
+
+- master : master分支上面每次提交都为一个版本
+- dev : 正常开发分支
+- hotfix : 紧急修复分支， 基于 master 分支
+- feature : 新特性分支， 基于 dev 分支
+- release : 发布分支， 基于 dev 分支
+
+### 规范
+
+1. 开发新需求时， 在 dev 分支上开发， 需求开发结束进行测试时， 不需要打 tag。
+2. 当测试通过，即将部署时， 新建 release 分支， 部署的项目包基于 release 分支打包， 且每次打包需要打 tag。
+3. 当部署之后发现有需要修改优化的内容， 或者验收不通过时， 基于 release 分支开发。 基于 release 分支开发时， dev 和 master 分支上面不应该再提交内容。
+4. 当验收通过时， 将 release 分支合并至 dev 和 master 分支上， master 分支合并需要打 tag。
+5. 当发现线上有紧急 bug 需要修复时， 新建 hotfix 分支， 基于 hotfix 开发。
+6. 当紧急 bug 修复并且测试通过之后， 需要将 hotfix 分支合并至 dev 分支上， 并且合并至 master 分支上， master 分支需要打 tag。
+7. 当开发新特性功能时， 应当基于 dev 分支新建 feature 分支， 在 feature 分支上开发。
+8. feature 分支上的新特性开发完毕之后， 合并至 dev 分支， dev 分支需求开发结束进行测试。
+9. 当新项目需要做定制化需求，且该需求与当前标准产品(master)冲突即无法在当前 dev 分支开发时， 新建 bg-master 分支， 并且在 bg-master 分支上打 tag ，标记基于的 master 版本。
+10. bg-master 上的每次提交都是一个版本， 开发时基于 bg-master 新建 bg-dev 分支。
+11. bg-dev 上定制化需求开发且测试通过时， 新建 bg-release 分支， 基于该分支进行打包部署测试。
+12. 当现场部署验收不通过时， 基于 bg-release 修改， 验收通过后合并至 bg-dev 和 bg-master， 且在 bg-master 上打 tag。
