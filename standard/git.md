@@ -51,7 +51,7 @@ emoji                                   | emoji 代码                   | commi
 :checkered_flag: (旗帜)                 | `:checkered_flag:`           | 修复 Windows 下的问题
 
 ## 分支管理
-
+参考[文章](https://blog.csdn.net/bocai_xiaodaidai/article/details/103814409)
 参考[流程图](https://www.processon.com/diagraming/5ed5a8de7d9c08162f2ad854)
 
 - master : master分支上面每次提交都为一个版本
