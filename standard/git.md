@@ -74,3 +74,9 @@ emoji                                   | emoji 代码                   | commi
 10. bg-master 上的每次提交都是一个版本， 开发时基于 bg-master 新建 bg-dev 分支。
 11. bg-dev 上定制化需求开发且测试通过时， 新建 bg-release 分支， 基于该分支进行打包部署测试。
 12. 当现场部署验收不通过时， 基于 bg-release 修改， 验收通过后合并至 bg-dev 和 bg-master， 且在 bg-master 上打 tag。
+
+### 命令
+
+- 合并分支时使用 `git merge --no-ff` 保留分支上的 commit 历史。
+
+- 打 tag 时使用 `git tag -a v1.0 -m "release version 1.0"` 创建附注标签。
