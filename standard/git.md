@@ -52,7 +52,7 @@ emoji                                   | emoji 代码                   | commi
 
 ## 分支管理
 参考[文章](https://blog.csdn.net/bocai_xiaodaidai/article/details/103814409)
-参考[流程图](https://www.processon.com/diagraming/5ed5a8de7d9c08162f2ad854)
+参考![流程图](../assets/git-branch.png)
 
 - master : master分支上面每次提交都为一个版本
 - dev : 正常开发分支
