@@ -43,3 +43,16 @@
 2. 现场部署后，根据自测清单进行测试
 
 3. 测试完之后， 在自测清单上标注该条目是否测试通过
+
+## 服务器列表
+
+| name | desc | ip | username | password | path |
+|--|--|--|--|--|--|
+|231 | develop env| 10.3.7.231 | root | dtc2019231! | /opt/dtcloud/applications/vueProject/intelligentPlatform-upgrade2
+| 21 | 云江湖 | 10.3.6.21 | root | dtc2019! | 
+
+## 数据库账号
+
+| ip | username |password |
+|--|--|--|
+| 10.3.7.231 | root | DTCserver2019! |
