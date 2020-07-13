@@ -50,6 +50,7 @@
 |--|--|--|--|--|--|
 |231 | develop env| 10.3.7.231 | root | dtc2019231! | /opt/dtcloud/applications/vueProject/intelligentPlatform-upgrade2
 | 21 | 云江湖 | 10.3.6.21 | root | dtc2019! | 
+| 30 | 前端服务器 | 10.3.6.30 | root | 123456 | 
 
 ## 数据库账号
 
