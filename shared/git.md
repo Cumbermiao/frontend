@@ -102,7 +102,7 @@
     手动删除stash记录
 * git stash pop   
     恢复该分支上最新一次保存，并删除记录
-* git stash apply stash @{0}/@{1}  
+* git stash apply "stash@{0}/@{1}"
     恢复该分支上名为@{0} /@{1}  的保存。stash记录不会被删除，需要通过git stash drop stash@{0} /@{1}手动删除
 
 ## 帮助 
