@@ -75,8 +75,8 @@ vmware 15, CentOS-7-x86_64-DVD-2003, nginx-1.17.2
 > 4. nginx中的HTTP SSL module需要OpenSSL yum install -y openssl openssl-devel
 > 5. 下载nginx(最好不要放在根目录下)       wget http://nginx.org/download/nginx-1.17.2.tar.gz
 > 6. 解压缩源码包并进入
->>    1. 解压缩：               tar -zxvf nginx-1.17.2.tar.gz
->>    2. 进入解压缩后文件夹：    cd nginx-1.17.2
+>>    1. 解压缩                tar -zxvf nginx-1.17.2.tar.gz
+>>    2. 进入解压缩后文件夹     cd nginx-1.17.2
 > 7. 编译并安装                 ./configure
                                make && make install 
 > 8. 配置nginx.config
@@ -84,10 +84,24 @@ vmware 15, CentOS-7-x86_64-DVD-2003, nginx-1.17.2
 >>  1. 进入安装目录            cd /usr/local/nginx/sbin/  
 >>   2. 启动                   ./nginx     
 
+## 代码上传
+当Nginx安装成功后，我们便可以把代码部署到Nginx中，选择代码需放置的文件夹位置，默认为“/opt/dtcloud/applications/intelligentPlatformCloud/platform-fe”，执行rz上传代码包，以zip压缩包为例，执行 unzip XX.zip命令进行解压缩（此处XX为压缩文件名，每种压缩文件类型的解压缩命令都不一样），如果文件名与此不一致，可执行mv A B命令进行重命名（A为目前文件夹名 B为目标文件名）。如需多次上传同样文件名的文件，需将原来的文件删除，删除文件命令：rm –f A（A为文件名）；删除文件夹以及文件夹中的文件命令：rm –rf B（B为文件夹名）
+### 总结
+> 1. rz                代码上传
+> 2. unzip XX.zip      解压zip格式的压缩文件
+> 3. rm -f XXX         删除XXX文件
+> 4. rm -rf XXX        删除XXX文件夹
+> 5. mv A B            将A文件重命名为B文件
 
 ### 配置
-> 1. server中listen监听端口为80
-> 2. server中location的root为根目录（既代码所在根目录） 
+当Nginx安装完成，并且代码上传之后，我们需要根据要求进行Nginx配置，进入Ngnix的配置文件目录（/usr/local/nginx/conf），对Nginx进行配置
+> 1. 配置用户或组，使得启动用户和Nginx工作用户一致，不然可能会导致页面403的问题
+> 2. 配置端口号，默认8907,服务器地址
+> 3. 默认目录为/opt/dtcloud/applications/intelligentPlatformCloud/platform-fe，部署项目名称即为platform-fe, 所以修改 server 下的 location root根目录的值。目录路径不正确会导致页面404.（既代码所在根目录）
+> 4. 转发至后端的网关端口 正常是 8180
+配置完成后，执行：wq 保存退出，
+可使用/usr/local/nginx/sbin/nginx –t命令检查配置文件是否正确;如果没有问题可到安装目录（/usr/local/nginx/sbin）执行nginx启动命令：./nginx 如果刚刚已执行启动命令，此处应该执行./nginx –s reload重启命令。对配置文件的每次操作都必须执行重启命令。
+
 
 ### 注意事项
 > 1. make 命令出现："make:*** No targets specified and no makefile found.Stop."参考<https://blog.csdn.net/shun35/article/details/94576800>
@@ -96,9 +110,14 @@ vmware 15, CentOS-7-x86_64-DVD-2003, nginx-1.17.2
 > 4. 如果启动过程中出现端口占用的情况，可使用ps -ef | grep nginx查看进程占用的id，并且使用kill -9 processId 强制杀掉进程
 > 5. 启动nginx时403的常见情况分析参考<https://blog.csdn.net/qq_35843543/article/details/81561240> 
 > 6. 以下包含了 Nginx 常用的几个命令
->>   1. /usr/local/nginx/sbin/nginx -s reload            # 重新载入配置文件
->>   2. /usr/local/nginx/sbin/nginx -s reopen            # 重启 Nginx
->>   3. /usr/local/nginx/sbin/nginx -s stop              # 停止 Nginx
+> 进入安装目录（/usr/local/nginx/sbin），可执行nginx启动关闭命令。
+>>   1. ./nginx –t                       #检查配置文件是否正确
+>>   2. ps –ef | grep nginx              #查看nginx是否启动
+>>   3. ./nginx                          #启动nginx
+>>   4. ./nginx –s stop 或 pkill nginx   #停止nginx
+>>   5. ./nginx –s quit                  #退出，等程序执行关闭后，建议使用此命令
+>>   6. ./nginx -s reload                # 重动态加载配置文件，可以在不关闭nginx的情况下更新配置文件，使其生效，必须执行重启命令
+>>   7. kill -9 processId                #如果启动过程中出现端口占用的情况，可使用ps -ef | grep nginx查看进程占用的id，并且使用 强制杀掉进程 
 
 
 ## 5.补充内容
@@ -106,13 +125,13 @@ vmware 15, CentOS-7-x86_64-DVD-2003, nginx-1.17.2
     * 命令模式: 用户刚刚启动 vi/vim，便进入了命令模式 
     * 输入模式：i 切换到输入模式，以输入字符。
     * 底线命令模式: :q 退出程序   :w 保存文件  :q! 不保存退出  按ESC键可随时退出底线命令模式
-* yum install：安装
-* ls：列出根目录(\)下的所有目录 
-* ifconfig：用于显示或设置网络设备 
-* chmod -R 777 fileName：对目前目录下的所有文件与子目录进行相同的权限变更 
-* mkdir AAA：在工作目录下，建立一个名为 AAA 的子目录
-* ps -ef | grep nginx：显示所有进程信息
-* wget XXXX：下载文件
-* tar -xzvf XXXX：解压文件
-* mv  ABC /XXX/XXX 将ABC文件移动到该文件夹下
-* linux下解压命令大全:<https://blog.csdn.net/kasmile/article/details/4369065?ops_request_misc=&request_id=&biz_id=102&utm_term=liunx%E8%A7%A3%E5%8E%8B%E5%91%BD%E4%BB%A4&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~sobaiduweb~default-2-4369065>
+* yum install            安装
+* ls                     列出根目录(\)下的所有目录 
+* ifconfig               用于显示或设置网络设备 
+* chmod -R 777 fileName  对目前目录下的所有文件与子目录进行相同的权限变更 
+* mkdir AAA              在工作目录下，建立一个名为 AAA 的子目录
+* rz                     上传文件
+* ps -ef | grep nginx    显示所有进程信息
+* wget XXXX              下载文件
+* mv ABC /XXX/XXX        将ABC文件移动到该文件夹下
+* linux下解压命令大全     <https://blog.csdn.net/kasmile/article/details/4369065?ops_request_misc=&request_id=&biz_id=102&utm_term=liunx%E8%A7%A3%E5%8E%8B%E5%91%BD%E4%BB%A4&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~sobaiduweb~default-2-4369065>
