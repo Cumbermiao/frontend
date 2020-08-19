@@ -21,6 +21,7 @@ tip:子项只能是容器的顶层子元素，不包含子项的子元素。
 
 ## 属性目录
 在Grid布局中，基于(display:grid | inline-grid),所有相关CSS属性正好分为两类，一类作用在grid容器上，还有一类作用在grid子项上。具体参见下表。
+
 | 作用在grid容器        | 作用在grid子项    |
 | --------------------- | ----------------- |
 | grid-template-columns | grid-column-start |
@@ -40,6 +41,7 @@ tip:子项只能是容器的顶层子元素，不包含子项的子元素。
 | grid-auto-rows        |                   |
 | grid-auto-flow        |                   |
 | grid                  |                   |
+
 ### 1.作用在grid容器
 #### 1.1  grid / inline-grid
 将元素定义为网格容器。
@@ -63,6 +65,7 @@ grid-template-rows：定义每一行的行高
 ![alt 兼容](./img/100px.jpg)
 ##### 拓展
 1. 定义网格单元的宽高，其单位可以是一个长度(如px、em、rem、vw、vh)或百分比，也可以是网格中自由空间的份数(单位为fr)。
+
 2. repeat()
    有时候，重复写同样的值非常麻烦，尤其网格很多时。这时，可以使用repeat()函数, 简化重复的值。上面的代码用repeat()改写如下。
 ```
@@ -73,8 +76,10 @@ grid-template-rows：定义每一行的行高
     }
 ```
 ![alt 兼容](./img/100px.jpg)
+
 repeat()接受两个参数，第一个参数是重复的次数（上例是3），第二个参数是所要重复的值。
-1. auto-fill 关键字
+
+3. auto-fill 关键字
    有时，单元格的大小是固定的，但是容器的大小不确定。如果希望每一行（或每一列）容纳尽可能多的单元格，这时可以使用auto-fill关键字表示自动填充。
 ```
     .container {
@@ -83,7 +88,8 @@ repeat()接受两个参数，第一个参数是重复的次数（上例是3）�
     }
 ```
 ![alt 兼容](./img/auto-fill.jpg)
-2. fr 关键字
+
+4. fr 关键字
    为了方便表示比例关系，网格布局提供了fr关键字(fraction 的缩写，意为"片段")。如果两列的宽度分别为1fr和2fr，就表示后者是前者的两倍。
 ```
     .container {
@@ -92,6 +98,7 @@ repeat()接受两个参数，第一个参数是重复的次数（上例是3）�
         }
 ```
 ![alt 兼容](./img/fr1.jpg) 
+
 fr可以与绝对长度的单位结合使用，这时会非常方便。
 ```
     .container {
@@ -100,7 +107,8 @@ fr可以与绝对长度的单位结合使用，这时会非常方便。
     }
 ```
 ![alt 兼容](./img/fr2.jpg)
-1. minmax()
+
+5. minmax()
    minmax()函数产生一个长度范围，表示长度就在这个范围之中。它接受两个参数，分别为最小值和最大值
 ```
     .container {
@@ -109,7 +117,8 @@ fr可以与绝对长度的单位结合使用，这时会非常方便。
     }
 ```
 ![alt 兼容](./img/minmax.jpg)
-1. auto 关键字
+
+6. auto 关键字
    auto关键字表示由浏览器自己决定长度。
 ```
     .container {
@@ -118,6 +127,7 @@ fr可以与绝对长度的单位结合使用，这时会非常方便。
     }
 ```
   ![alt 兼容](./img/auto.jpg)
+
 7. 网格线的名称
    grid-template-columns属性和grid-template-rows属性里面，还可以使用方括号，指定每一根网格线的名字，方便以后的引用。
 ```
@@ -164,6 +174,7 @@ grid-row-gap属性设置行与行的间隔(行间距)，grid-column-gap属性设
     }
 ```
 ![alt 兼容](./img/gap1.jpg)
+
 grid-gap属性是grid-column-gap和grid-row-gap的合并简写形式，语法如下：
     `grid-gap: 20px 20px;`
 如果grid-gap省略了第二个值，浏览器认为第二个值等于第一个值,简化如下：
@@ -173,6 +184,7 @@ grid-gap属性是grid-column-gap和grid-row-gap的合并简写形式，语法如
     `gap: 20px;`
 #### 1.5 justify-items/align-items/place-items(单元格的水平垂直)
 justify-items属性设置单元格内容的水平位置(左中右)，align-items属性设置单元格内容的垂直位置(上中下)。
+
 ##### 用法
 ```
     .container {
@@ -185,14 +197,18 @@ start：对齐单元格的起始边缘。
 end：对齐单元格的结束边缘。
 center：单元格内部居中。
 stretch：拉伸，占满单元格的整个宽度（默认值）。
+
 ##### justify-items
 ![alt 兼容](./img/justify-items.jpg)
+
 ##### align-items
 ![alt 兼容](./img/align-items.jpg)
+
 ##### 拓展
 place-items属性是align-items属性和justify-items属性的合并简写形式。
     `place-items: start end;`
 如果省略第二个值，则浏览器认为与第一个值相等。
+
 #### 1.6 justify-content/align-content/place-content(整体内容区域的水平垂直)
 justify-content属性是整个内容区域在容器里面的水平位置(左中右)，align-content属性是整个内容区域的垂直位置(上中下)。
 ##### 用法
@@ -210,10 +226,13 @@ stretch：填充网格容器
 space-around：在每个网格子项中间放置均等的空间，在始末两端只有一半大小
 space-between：两边对齐，在每个网格子项中间放置均等的空间，在始末两端没有空间
 space-evenly：网格间隔相等，包括始末两端
+
 ##### justify-content
 ![alt 兼容](./img/justify-content.jpg)
+
 ##### align-content
 ![alt 兼容](./img/align-content.jpg)
+
 #### 1.7 grid-auto-columns/grid-auto-rows(自动排列)
 有时候，一些项目的指定位置，在现有网格的外部。比如网格只有3列，但是某一个项目指定在第5行。这时，浏览器会自动生成多余的网格，以便放置项目。
 ##### 用法
@@ -226,6 +245,7 @@ space-evenly：网格间隔相等，包括始末两端
     }
 ```
 ![alt 兼容](./img/grid-auto.jpg)
+
 #### 1.8 grid-auto-flow(放置顺序)
 划分网格以后，容器的子元素会按照顺序，自动放置在每一个网格。默认的放置顺序是"先行后列"，即先填满第一行，再开始放入第二行
 ##### 用法
@@ -239,10 +259,13 @@ space-evenly：网格间隔相等，包括始末两端
 ```
 row：按照行依次从左到右排列
 ![alt 兼容](./img/100px.jpg)
+
 column：按照列依次从上到下排列
 ![alt 兼容](./img/column.jpg)
+
 row dense：表示"先行后列"，并且尽可能紧密填满，尽量不出现空格
 ![alt 兼容](./img/row-dense.jpg)
+
 column dense：表示"先列后行"，并且尽可能紧密填满，尽量不出现空格
 ![alt 兼容](./img/column-dense.jpg)
 
@@ -263,6 +286,7 @@ grid-row-end属性：下边框所在的水平网格线
     }
 ```
 ![alt 兼容](./img/item.jpg)
+
 ##### 拓展
 1. 这四个属性的值，除了指定为第几个网格线，还可以指定为网格线的名字。
 ```
@@ -317,6 +341,7 @@ grid-area属性指定项目放在哪一个区域。
     } 
 ```
 ![alt 兼容](./img/area.jpg)
+
 grid-area属性还可用作grid-row-start、grid-column-start、grid-row-end、grid-column-end的合并简写形式，直接指定项目的位置。
 ```
     .item-1 {
@@ -340,8 +365,10 @@ center：单元格内部居中。
 stretch：拉伸，占满单元格的整个宽度（默认值）。
 ##### justify-self
 ![alt 兼容](./img/justify-self.jpg)
+
 ##### align-self
 ![alt 兼容](./img/align-self.jpg)
+
 place-self属性是align-self属性和justify-self属性的合并简写形式,如果省略第二个值，place-self属性会认为这两个值相等
 #####
 ```
