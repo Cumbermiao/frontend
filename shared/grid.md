@@ -258,15 +258,19 @@ space-evenly：网格间隔相等，包括始末两端
     }
 ```
 row：按照行依次从左到右排列
+
 ![alt 兼容](./img/100px.jpg)
 
 column：按照列依次从上到下排列
+
 ![alt 兼容](./img/column.jpg)
 
 row dense：表示"先行后列"，并且尽可能紧密填满，尽量不出现空格
+
 ![alt 兼容](./img/row-dense.jpg)
 
 column dense：表示"先列后行"，并且尽可能紧密填满，尽量不出现空格
+
 ![alt 兼容](./img/column-dense.jpg)
 
 ### 2.作用在grid子项
