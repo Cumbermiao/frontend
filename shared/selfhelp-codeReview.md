@@ -7,8 +7,67 @@
 ### 拆分组件
 1. 将指标、维度、过滤器封装成一个组件（CheckContent）
    * 增加具名插槽，解决维度中日期的下拉框问题
-   * 使用`$emit`将checkbox选中的值传回父组件，切换场景、重置时，需要在父组件中进行`this.$refs.targetCheck.checkedList = []`，将数据清空。
-   * 值得注意的是，因为维度checkbox改变时，过滤器需要作出相应变化，所以在`latitudeChange()`方法中，不仅需要将`add.vue`中`this.selectList`进行修改，还需要执行`this.$refs.filterCheck.checkedList = this.selectList`，实现对组件中值的修改。
+   ~~* 使用`$emit`将checkbox选中的值传回父组件，切换场景、重置时，需要在父组件中进行`this.$refs.targetCheck.checkedList = []`，将数据清空。~~
+   ~~* 值得注意的是，因为维度checkbox改变时，过滤器需要作出相应变化，所以在`latitudeChange()`方法中，不仅需要将`add.vue`中`this.selectList`进行修改，还需要执行`this.$refs.filterCheck.checkedList = this.selectList`，实现对组件中值的修改。~~  
+
+    * 后期优化：不在子组件中处理数据，将数据逻辑放在父组件
+      优化前：
+      ```
+        CheckContent.vue
+        <el-checkbox-group v-else :value="checkedList" :disabled="!isEdit && crUid!==''" @change="checkboxChange">
+          <el-checkbox
+            v-for="(item,index) of checkArr"
+            :key="item.code"
+            :label="item.code"
+            :disabled="disableArr[index]"
+          >
+            {{ item.name }}
+          </el-checkbox>
+        </el-checkbox-group>
+
+        checkboxChange(value) {
+          this.$emit('checkboxChange', this.checkedList)
+        }
+
+
+
+        add.vue
+        filterChange(data) { // 过滤器checkbox发生变化时
+          this.selectList = data
+        }
+      ```
+
+      优化后：
+
+      ```  
+        CheckContent.vue
+        <el-checkbox-group v-else :value="checkedList" :disabled="!isEdit && crUid!==''">
+          <el-checkbox
+            v-for="(item,index) of checkArr"
+            :key="item.code"
+            :label="item.code"
+            :disabled="disableArr[index]"
+            @change="v => checkboxChange(v, item.code)"
+          >
+            {{ item.name }}
+          </el-checkbox>
+        </el-checkbox-group>
+
+        checkboxChange(checked, code) {
+          this.$emit('checkboxChange', checked, code)
+        }
+
+
+        add.vue
+        filterChange(checked, code) { // 过滤器checkbox发生变化时
+          if (checked) {
+            this.selectList.push(code)
+          } else {
+            this.selectList = this.selectList.filter(item => item !== code)
+          }
+        }
+      ```
+
 2. 将表格上方筛选条件进行封装（SelectContent）
     * 将日期，select选中的值等相关方法从add.vue中分离，提高可读性
     * checkbox中过滤器中riqi和其他值发生变化时，组件不会再触发`mounted`钩子，所以需要通过监听触发`riqiSelectedChange()`、`selectDataChange()`方法，目的是为了修改日期组件初始值、获取对应下拉框中的值。
@@ -120,4 +179,4 @@
     id:this.reportId
   }
 ```
-4. 子组件checkCOntent数据
+4. checkContent子组件优化
