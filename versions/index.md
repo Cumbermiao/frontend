@@ -14,6 +14,7 @@
 | platform-dev | 8987 | 测试环境 |
 | platform-demo | 8967 | 演示环境 |
 | platform-yjh | 8907 | 云江湖测试环境 |
+| platform-dfwl| 8988 | 东方网力测试环境 |
 
 ## 项目说明
 
