@@ -80,3 +80,12 @@ emoji                                   | emoji 代码                   | commi
 - 合并分支时使用 `git merge --no-ff` 保留分支上的 commit 历史。
 
 - 打 tag 时使用 `git tag -a v1.0 -m "release version 1.0"` 创建附注标签。
+
+### git 19 用户管理
+
+用户组 fe
+
+| user | passwd | desc |
+--|--|--
+|fe-manager | 123456 | --
+| miao | 123456 | --
